@@ -1,0 +1,15 @@
+<form [formGroup]="formCustom">
+    <input formControlName="inputSearchForm" appUserDirective type="text" #inputSearch class="text-black" [hasInputErros]="formCustom.get('inputSearchForm')?.errors?true:false">
+    <pre appUserDirective [showInputErros]="formCustom.get('inputSearchForm')?.errors"></pre>
+    <!-- <pre >{{formCustom.get('inputSearchForm')?.errors | json}}</pre> -->
+    <button class="bg-blue-500 text-white p-3" type="button" (click)="GetUsersData()" [disabled]="!formCustom.valid">Get Users</button>
+</form>
+
+<ng-container *ngIf="userService.currentUsers$ | async as Users; else loading">
+    <div *ngFor="let user of Users">
+        <h1>{{user.login}}</h1>
+        <a [routerLink]="'/user-details'" [queryParams]="{ userlogin: user.login, avatarUrl: user.avatar_url}">Go to Details</a>
+        <pre>{{user | json}}</pre>
+    </div>
+</ng-container>
+<ng-template #loading>Loading ....</ng-template>
