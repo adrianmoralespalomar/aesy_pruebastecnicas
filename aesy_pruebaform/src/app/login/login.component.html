@@ -1,0 +1,7 @@
+<form action="" [formGroup]="customForm" class="flex flex-col m-auto gap-4">
+  <input type="text" formControlName="username">
+  <span class="text-red" loginDirectiveCustom [setColorBorder]="customForm.get('username')?.errors">{{customForm.get('username')?.errors | json}}</span>
+  <input type="text" formControlName="password">
+  <span class="text-red" loginDirectiveCustom [setColorBorder]="customForm.get('password')?.errors">  {{customForm.get('password')?.errors | json}}  </span>
+  <button class="bg-green-500" [disabled]="!customForm.invalid">Log in</button>
+</form>
